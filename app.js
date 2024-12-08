@@ -10,6 +10,14 @@ app.get('/', (req, res) => {
     res.sendFile('public/home_page.html', { root: __dirname })
 })
 
+app.get('/help', (req, res) => {
+    res.sendFile('public/help_page.html', { root: __dirname })
+})
+
+app.get('/about', (req, res) => {
+    res.sendFile('public/about_page.html', { root: __dirname })
+})
+
 app.listen(port, hostname, () => {
     console.log(`Express app listening on Port: ${port}`)
 })

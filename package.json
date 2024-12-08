@@ -1,0 +1,25 @@
+{
+  "name": "inst377---final-project",
+  "version": "1.0.0",
+  "description": "Final Project INST377",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidney-HC/INST377---Final-Project.git"
+  },
+  "author": "Sidney Howard-Clinton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidney-HC/INST377---Final-Project/issues"
+  },
+  "homepage": "https://github.com/sidney-HC/INST377---Final-Project#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.7"
+  },
+  "keywords": []
+}

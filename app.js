@@ -1,11 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
-import express from 'express';
-import { fileURLToPath } from 'url';
-import path from 'path';
+const express = require('express');
+const path = require('path');
+const { createClient } = require('@supabase/supabase-js');
 
-// Recreate __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 
 const supabaseUrl = 'https://dodldqhpuctrjaxgvmma.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvZGxkcWhwdWN0cmpheGd2bW1hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM2MjgzMjUsImV4cCI6MjA0OTIwNDMyNX0.VWXV-hVge3QwAXHDTOvioOxGK7-Vnc_AZwZWiQpu5Ec';

@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.get('/', (req, res) => {
-  res.sendFile('public/home_page.html', { root: __dirname });
+  res.sendFile('public/home.html', { root: __dirname });
 });
 
 app.get('/help', (req, res) => {
@@ -41,7 +41,7 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile('public/about_page.html', { root: __dirname });
+  res.sendFile('public/about.html', { root: __dirname });
 });
 
 // Backend API to retrieve today's exchange rate data

@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Final Project INST377",
   "main": "index.js",
+  "type": "commonjs",
+
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/sidney-HC/INST377---Final-Project#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.3",
     "express": "^4.21.2",
     "nodemon": "^3.1.7"
   },

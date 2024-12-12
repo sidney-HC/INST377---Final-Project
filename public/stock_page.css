@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #444;
+  color: white;
+  padding: 20px;
+}
+
+#stock-ticker {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+main {
+  padding: 20px;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  max-width: 90%;
+  border: 1px solid #ddd;
+}

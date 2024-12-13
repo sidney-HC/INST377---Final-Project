@@ -132,7 +132,7 @@ async function get_hist_exchange(histDate) {
       // Flatten the `rates` key into the main object and rename keys
       const { rates, date: apiDate, base, amount } = apiData; 
       const supabaseInsertData = {
-        Date: apiDate, // Use the API's date value
+        Date: apiDate, 
         Base: base, 
         Amount: amount, 
         ...rates, 
@@ -193,7 +193,7 @@ app.get('/get_cur_exchange', async (req, res) => {
 
 // Backend API to retrieve historical exchange rate data by passing in date 'YYYY-MM-DD'
 app.post('/get_hist_exchange', async (req, res) => {
-  const { date } = req.body; // Extract date from the request body
+  const { date } = req.body; 
 
   if (!date) {
     return res.status(400).send({ error: 'Date is required' });

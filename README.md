@@ -3,7 +3,7 @@
 
 
 ## Description
-This website will utilize MarketStack API and fixer.io to to display real-time stock prices on a dashboard. We have implemented an interactive stock ticker and different charts as descriptive representations. This output is crucial for our varied stakeholders (small investors and financial analysts) who rely on accurate and
+This website will utilize Polygon and frankfurter API tools to to display real-time stock prices on a dashboard. We have implemented an interactive stock ticker and different charts as descriptive representations. This output is crucial for our varied stakeholders (small investors and financial analysts) who rely on accurate and
 up-to-date stock information in order to make their decisions on market matters.
 ## Targeted Browsers 
 

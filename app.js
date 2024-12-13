@@ -21,7 +21,7 @@ async function get_todays_exchange() {
 
   // Query Supabase
   let { data: exchange_rate, error } = await supabase
-    .from('exchange_rates') // Replace with your actual table name
+    .from('exchange_rates') 
     .select('*')
     .eq('Date', formattedDate);
 
@@ -44,15 +44,14 @@ async function get_todays_exchange() {
       console.log('Data fetched from Frankfurter API:', apiData);
 
       // Flatten the `rates` key into the main object and rename keys
-      const { rates, date, base, amount } = apiData; // Extract values
+      const { rates, date, base, amount } = apiData; 
       const supabaseInsertData = {
         Date: date,
         Base: base,
         Amount: amount,
-        ...rates, // Spread the rates into the main object
+        ...rates, 
       };
       console.log(supabaseInsertData)
-      // Insert into Supabase
       const { data: insertedData, error: insertError } = await supabase
         .from('exchange_rates')
         .insert([supabaseInsertData])
@@ -107,7 +106,7 @@ async function get_hist_exchange(histDate) {
 
   // Query Supabase
   let { data: exchange_rate, error } = await supabase
-    .from('exchange_rates') // Replace with your actual table name
+    .from('exchange_rates') 
     .select('*')
     .eq('Date', formattedDate);
 
@@ -131,12 +130,12 @@ async function get_hist_exchange(histDate) {
       console.log('Data fetched from Frankfurter API:', apiData);
 
       // Flatten the `rates` key into the main object and rename keys
-      const { rates, date: apiDate, base, amount } = apiData; // Extract and rename `date` to `apiDate`
+      const { rates, date: apiDate, base, amount } = apiData; 
       const supabaseInsertData = {
         Date: apiDate, // Use the API's date value
-        Base: base, // Rename `base` to `Base`
-        Amount: amount, // Rename `amount` to `Amount`
-        ...rates, // Spread the rates into the main object
+        Base: base, 
+        Amount: amount, 
+        ...rates, 
       };
 
       console.log('Data prepared for Supabase:', supabaseInsertData);
@@ -153,7 +152,7 @@ async function get_hist_exchange(histDate) {
       }
 
       console.log('Data successfully inserted into Supabase:', insertedData);
-      return insertedData; // Return inserted data
+      return insertedData; 
     } catch (apiError) {
       console.error('Error fetching data from Frankfurter API:', apiError);
       throw apiError;

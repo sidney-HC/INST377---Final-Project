@@ -20,5 +20,5 @@ up-to-date stock information in order to make their decisions on market matters.
 
 ## Developer Manual
 
-
+[Developer Manual](https://github.com/sidney-HC/INST377---Final-Project/blob/main/docs/developer_manual.md)
 

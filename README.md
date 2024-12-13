@@ -1,5 +1,5 @@
-# INST377---Final-Project
-(A caption I haven't thought of- Ope)
+# Simple Stocks
+
 
 
 ## Description

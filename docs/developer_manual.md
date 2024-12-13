@@ -223,3 +223,30 @@ http://127.0.0.1:3000
   ```
 
 ## 5. Future Roadmap
+
+### Features to Implement
+
+1. **User Authentication**
+
+   - Add user login and registration features to restrict access to certain endpoints.
+   - Integrate with Supabase’s authentication module for easy setup.
+
+2. **Enhanced Error Reporting**
+
+   - Provide more detailed error responses for API consumers.
+   - Log errors to a monitoring service like Sentry for tracking issues.
+
+3. **Historical Data Analysis**
+
+   - Add endpoints for analyzing historical exchange rate trends.
+   - Include visualization features such as graphs and charts for frontend applications.
+
+4. **Multi-Currency Conversion**
+
+   - Extend the `/convert` endpoint to support multi-currency conversions (e.g., `amount` in USD converted to multiple currencies).
+
+5. **Caching for Exchange Rates**
+   - Implement caching to reduce reliance on external API calls and improve performance.
+   - Use tools like Redis for storing frequently accessed data.
+
+---

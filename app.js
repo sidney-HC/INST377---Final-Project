@@ -21,7 +21,7 @@ async function get_todays_exchange() {
 
   // Query Supabase
   let { data: exchange_rate, error } = await supabase
-    .from('exchange_rates') 
+    .from('exchange_rates') // Replace with your actual table name
     .select('*')
     .eq('Date', formattedDate);
 
@@ -44,14 +44,15 @@ async function get_todays_exchange() {
       console.log('Data fetched from Frankfurter API:', apiData);
 
       // Flatten the `rates` key into the main object and rename keys
-      const { rates, date, base, amount } = apiData; 
+      const { rates, date, base, amount } = apiData; // Extract values
       const supabaseInsertData = {
         Date: date,
         Base: base,
         Amount: amount,
-        ...rates, 
+        ...rates, // Spread the rates into the main object
       };
       console.log(supabaseInsertData)
+      // Insert into Supabase
       const { data: insertedData, error: insertError } = await supabase
         .from('exchange_rates')
         .insert([supabaseInsertData])
@@ -106,7 +107,7 @@ async function get_hist_exchange(histDate) {
 
   // Query Supabase
   let { data: exchange_rate, error } = await supabase
-    .from('exchange_rates') 
+    .from('exchange_rates') // Replace with your actual table name
     .select('*')
     .eq('Date', formattedDate);
 
@@ -130,12 +131,12 @@ async function get_hist_exchange(histDate) {
       console.log('Data fetched from Frankfurter API:', apiData);
 
       // Flatten the `rates` key into the main object and rename keys
-      const { rates, date: apiDate, base, amount } = apiData; 
+      const { rates, date: apiDate, base, amount } = apiData; // Extract and rename `date` to `apiDate`
       const supabaseInsertData = {
         Date: apiDate, // Use the API's date value
-        Base: base, 
-        Amount: amount, 
-        ...rates, 
+        Base: base, // Rename `base` to `Base`
+        Amount: amount, // Rename `amount` to `Amount`
+        ...rates, // Spread the rates into the main object
       };
 
       console.log('Data prepared for Supabase:', supabaseInsertData);
@@ -152,7 +153,7 @@ async function get_hist_exchange(histDate) {
       }
 
       console.log('Data successfully inserted into Supabase:', insertedData);
-      return insertedData; 
+      return insertedData; // Return inserted data
     } catch (apiError) {
       console.error('Error fetching data from Frankfurter API:', apiError);
       throw apiError;
@@ -166,6 +167,33 @@ async function get_hist_exchange(histDate) {
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// API Endpoints
+// 1. Current Exchange Rates
+app.get('/get_cur_exchange', (req, res) => {
+  res.json([
+    { Base: 'USD', Amount: 1, EUR: 0.85, AUD: 1.5 }
+  ]);
+});
+
+// 2. Historical Exchange Rates
+app.post('/get_hist_exchange', (req, res) => {
+  const { date } = req.body;
+  res.json({ Date: date, Base: 'USD', Amount: 1, EUR: 0.9, AUD: 1.6 });
+});
+
+// 3. Currency Conversion
+app.get('/convert', (req, res) => {
+  const { from, to, amount } = req.query;
+  const conversionRate = 0.85; // Example rate
+  const convertedAmount = (amount * conversionRate).toFixed(2);
+  res.json({ result: `${amount} ${from} = ${convertedAmount} ${to}` });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://127.0.0.1:${port}`);
+});
 
 // Routes
 app.get('/', (req, res) => {

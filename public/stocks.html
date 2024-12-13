@@ -1,19 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stocks - Real-Time Financial Dashboard</title>
-  <link rel="stylesheet" href="stocks_page.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks - Real-Time Financial Dashboard</title>
+    <link rel="stylesheet" href="stock_page.css">
 </head>
+
 <body>
-  <header>
-    <h1>Stock Data</h1>
-    <div id="stock-ticker">Loading stock data...</div>
-  </header>
-  <main>
-    <canvas id="stockChart"></canvas>
-  </main>
-  <script type="module" src="stocks_page.js"></script>
+    <header>
+        <h1>Stock Data</h1>
+        <div id="stock-ticker">Loading stock data...</div>
+    </header>
+    <main>
+        <canvas id="stockChart"></canvas>
+        <section>
+            <h2>Current Exchange Rates</h2>
+            <div id="current-exchange-rates">Loading exchange rates...</div>
+        </section>
+        <section>
+            <h2>Historical Exchange Rates</h2>
+            <form id="historical-data-form">
+                <input type="date" id="date-input" required>
+                <button type="submit">Get Historical Data</button>
+            </form>
+            <div id="historical-data-output"></div>
+        </section>
+        <section>
+            <h2>Currency Converter</h2>
+            <form method="get" id="currencyForm">
+                <label for="fromCurrency">From Currency: </label>
+                <select id="fromCurrency" name="fromCurrency"></select>
+                <br>
+                <label for="toCurrency">To Currency: </label>
+                <select id="toCurrency" name="toCurrency"></select>
+                <br>
+                <label for="NumberToConvert">Number To Convert: </label>
+                <input type="number" step=".01" id="convertPrice" name="ConvertPrice" required></input>
+                <br>
+                <button type="button" onclick="convertCurrency();">Convert</button>
+                <h1 id="conversionResult"></h1>
+            </form>
+        </section>
+    </main>
+    <script>
+
+        function populateForm() {
+                let toCurrency = document.getElementById('toCurrency');
+                let fromCurrency = document.getElementById('fromCurrency');
+
+                // Clear existing options
+                fromCurrency.innerHTML = '';
+                toCurrency.innerHTML = '';
+
+                // Fetch the data from the API
+                fetch("https://v6.exchangerate-api.com/v6/d68026dc2228405307fca860/latest/USD")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        const currencies = Object.keys(data.conversion_rates); // Extract currency codes
+                        console.log(data.conversion_rates)
+
+                        // Populate the dropdowns with currency options
+                        currencies.forEach((currency) => {
+                            const optionFrom = document.createElement("option");
+                            const optionTo = document.createElement("option");
+
+                            optionFrom.value = currency;
+                            optionFrom.textContent = currency;
+                            optionTo.value = currency;
+                            optionTo.textContent = currency;
+
+                            fromCurrency.appendChild(optionFrom);
+                            toCurrency.appendChild(optionTo);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching currencies:", error);
+                        alert("Failed to load currencies. Please try again later.");
+                    });
+            }
+
+            // Ensure the form is populated after the page loads
+            document.addEventListener('DOMContentLoaded', populateForm);
+            document.addEventListener('DOMContentLoaded', populateForm);
+    </script>
 </body>
+
 </html>

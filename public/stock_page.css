@@ -1,30 +1,175 @@
+/* General styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
+  background-color: #f9f9f9;
+  color: #333;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Header */
 header {
-  background-color: #444;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #007BFF;
   color: white;
+}
+
+/* Main layout */
+.main-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top section: Stock chart and latest price */
+.stock-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  gap: 20px;
 }
 
-#stock-ticker {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #f0f0f0;
+.stock-container .content-area {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-main {
-  padding: 20px;
+/* Chart container */
+#stocksChart {
+  flex: 3; /* Chart takes up most of the space */
 }
 
-canvas {
-  display: block;
-  margin: 20px auto;
-  max-width: 90%;
+#stocksChart canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Latest price table */
+#latest-price {
+  flex: 1; /* Latest price table takes up less space */
+  max-width: 400px; /* Increased width to fit new fields */
+  overflow: hidden;
+}
+
+#latest-price table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#latest-price th,
+#latest-price td {
   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#latest-price th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+
+/* Bottom section: Exchange Rates and Forms */
+.bottom-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-top: 2px solid #ddd;
+}
+
+/* Exchange rates container */
+.rates-container {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Table styling */
+#exchange-rates table {
+  width: 100%;
+  max-height: 100%;
+  border-collapse: collapse;
+}
+
+#exchange-rates th,
+#exchange-rates td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#exchange-rates th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Forms container */
+.forms-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: flex-start; /* Align forms to the left */
+}
+
+/* Forms styling */
+.historical-section,
+.converter-section {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: auto; /* Shrinks to fit content */
+}
+
+form label {
+  display: block; /* Stack labels vertically */
+  font-weight: bold;
+}
+
+form input,
+form button {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: auto; /* Adjust input width dynamically */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+form button {
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f4f4f4;
+  color: #555;
 }

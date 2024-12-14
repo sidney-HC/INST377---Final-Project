@@ -1,95 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stocks - Real-Time Financial Dashboard</title>
+    <title>Stocks and Exchange Rates</title>
     <link rel="stylesheet" href="stock_page.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="stock.js" defer></script>
 </head>
-
 <body>
     <header>
-        <h1>Stock Data</h1>
-        <div id="stock-ticker">Loading stock data...</div>
+        <h1>Stocks and Currency Exchange Rates</h1>
     </header>
-    <main>
-        <canvas id="stockChart"></canvas>
-        <section>
-            <h2>Current Exchange Rates</h2>
-            <div id="current-exchange-rates">Loading exchange rates...</div>
+
+    <main class="main-layout">
+        <!-- Top section: Stock Chart -->
+        <section class="stock-container">
+            <h2>Let's Chart Some Stocks!</h2>
+            <div class="content-area">
+                <!-- Stock Form -->
+                <div id="stocksForm" class="content-box">
+                    <form id="stockForm" onsubmit="genStockChart(event)">
+                        <label for="ticker">Enter Symbol:</label>
+                        <input type="text" id="ticker" name="ticker" placeholder="Enter symbol" required>
+                        <br>
+                        <label for="dayCount">Choose Days:</label>
+                        <select id="dayCount" name="dayCount">
+                            <option value="30">30 Days</option>
+                            <option value="60">60 Days</option>
+                            <option value="90">90 Days</option>
+                        </select>
+                        <br>
+                        <button class="button-12" type="submit">Submit</button>
+                    </form>
+                </div>
+        
+                <!-- Stock Chart -->
+                <div id="stocksChart" class="content-box"></div>
+        
+                <!-- Latest Price Table -->
+                <div id="latest-price" class="content-box">
+                    <h3>Latest Stock Price</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Name</th>
+                                <th>Price</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="latest-price-body">
+                            <tr>
+                                <td colspan="6">No data available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
         </section>
-        <section>
-            <h2>Historical Exchange Rates</h2>
-            <form id="historical-data-form">
-                <input type="date" id="date-input" required>
-                <button type="submit">Get Historical Data</button>
-            </form>
-            <div id="historical-data-output"></div>
-        </section>
-        <section>
-            <h2>Currency Converter</h2>
-            <form method="get" id="currencyForm">
-                <label for="fromCurrency">From Currency: </label>
-                <select id="fromCurrency" name="fromCurrency"></select>
-                <br>
-                <label for="toCurrency">To Currency: </label>
-                <select id="toCurrency" name="toCurrency"></select>
-                <br>
-                <label for="NumberToConvert">Number To Convert: </label>
-                <input type="number" step=".01" id="convertPrice" name="ConvertPrice" required></input>
-                <br>
-                <button type="button" onclick="convertCurrency();">Convert</button>
-                <h1 id="conversionResult"></h1>
-            </form>
+        
+
+        <!-- Bottom section: Exchange Rates and Forms -->
+        <section class="bottom-container">
+            <!-- Exchange Rates Table -->
+            <div class="rates-container">
+                <h2>Exchange Rates (Date: <span id="current-date"></span>)</h2>
+                <div id="exchange-rates">Loading exchange rates...</div>
+            </div>
+
+            <!-- Forms Section -->
+            <div class="forms-container">
+                <!-- Fetch Historical Exchange Rates -->
+                <div class="historical-section content-box">
+                    <h2>Fetch Historical Exchange Rates</h2>
+                    <form id="historical-rates-form">
+                        <label for="hist-date">Select Date:</label>
+                        <input type="date" id="hist-date" name="date" required>
+                        <button type="submit">Fetch Historical Rates</button>
+                    </form>
+                </div>
+
+                <!-- Currency Converter -->
+                <div class="converter-section content-box">
+                    <h2>Currency Converter</h2>
+                    <form id="convert-form">
+                        <label for="from-currency">From:</label>
+                        <input type="text" id="from-currency" name="from" placeholder="USD" required>
+                        <br>
+                        <label for="to-currency">To:</label>
+                        <input type="text" id="to-currency" name="to" placeholder="EUR" required>
+                        <br>
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" placeholder="100" required>
+                        <button type="submit">Convert</button>
+                    </form>
+                    <div id="conversion-result"></div>
+                </div>
+            </div>
         </section>
     </main>
-    <script>
 
-        function populateForm() {
-                let toCurrency = document.getElementById('toCurrency');
-                let fromCurrency = document.getElementById('fromCurrency');
-
-                // Clear existing options
-                fromCurrency.innerHTML = '';
-                toCurrency.innerHTML = '';
-
-                // Fetch the data from the API
-                fetch("https://v6.exchangerate-api.com/v6/d68026dc2228405307fca860/latest/USD")
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        const currencies = Object.keys(data.conversion_rates); // Extract currency codes
-                        console.log(data.conversion_rates)
-
-                        // Populate the dropdowns with currency options
-                        currencies.forEach((currency) => {
-                            const optionFrom = document.createElement("option");
-                            const optionTo = document.createElement("option");
-
-                            optionFrom.value = currency;
-                            optionFrom.textContent = currency;
-                            optionTo.value = currency;
-                            optionTo.textContent = currency;
-
-                            fromCurrency.appendChild(optionFrom);
-                            toCurrency.appendChild(optionTo);
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("Error fetching currencies:", error);
-                        alert("Failed to load currencies. Please try again later.");
-                    });
-            }
-
-            // Ensure the form is populated after the page loads
-            document.addEventListener('DOMContentLoaded', populateForm);
-            document.addEventListener('DOMContentLoaded', populateForm);
-    </script>
+    <footer>
+        <p>&copy; 2024 Exchange Rates Tracker</p>
+    </footer>
 </body>
-
 </html>

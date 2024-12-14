@@ -169,26 +169,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Endpoints
-// 1. Current Exchange Rates
-app.get('/get_cur_exchange', (req, res) => {
-  res.json([
-    { Base: 'USD', Amount: 1, EUR: 0.85, AUD: 1.5 }
-  ]);
-});
-
-// 2. Historical Exchange Rates
-app.post('/get_hist_exchange', (req, res) => {
-  const { date } = req.body;
-  res.json({ Date: date, Base: 'USD', Amount: 1, EUR: 0.9, AUD: 1.6 });
-});
-
-// 3. Currency Conversion
-app.get('/convert', (req, res) => {
-  const { from, to, amount } = req.query;
-  const conversionRate = 0.85; // Example rate
-  const convertedAmount = (amount * conversionRate).toFixed(2);
-  res.json({ result: `${amount} ${from} = ${convertedAmount} ${to}` });
-});
 
 // Start the server
 app.listen(port, () => {

@@ -170,8 +170,8 @@ form button:hover {
 footer {
   text-align: center;
   padding: 10px 0;
-  background-color: #f4f4f4;
-  color: #555;
+  background-color: #007BFF;
+  color: white;
 }
 /* General Reset */
 body, ul, li, a {

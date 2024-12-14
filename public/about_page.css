@@ -19,3 +19,70 @@ main {
 h2 {
   color: #007bff;
 }
+
+/* General Reset */
+body, ul, li, a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+/* Header Styling */
+header {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 0;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: white;
+  color: #007BFF;
+}
+/* General Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure body and html take up full height */
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stack header, main, and footer */
+  min-height: 100vh; /* Ensure body is at least the height of the viewport */
+}
+
+main {
+  flex: 1; /* Pushes the footer to the bottom by taking up available space */
+  padding: 20px;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #007BFF;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}

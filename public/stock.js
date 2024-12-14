@@ -49,7 +49,7 @@ function updateExchangeRatesTable(data) {
 // Generate Stock Chart and Fetch Latest Price
 async function genStockChart(event) {
     event.preventDefault();
-    const apiKey = '3Co8vDAZ9vnEovQ_oIETgDIfUxpVerUK'; // Replace with your own API key
+    const apiKey = '3Co8vDAZ9vnEovQ_oIETgDIfUxpVerUK'; 
     const ticker = document.getElementById("ticker").value.toUpperCase();
     const days = parseInt(document.getElementById("dayCount").value);
 

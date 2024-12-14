@@ -41,7 +41,7 @@ function updateExchangeRatesTable(data) {
         </tbody>
     `;
 
-    ratesContainer.innerHTML = ''; // Clear previous content
+    ratesContainer.innerHTML = ''; 
     ratesContainer.appendChild(table);
 }
 
